@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E2A Wealth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0A1628;
+  --gold: #B8975A;
+  --gold-dim: rgba(184,151,90,0.15);
+  --cream: #F2EDE4;
+  --muted: rgba(242,237,228,0.38);
+}
+
+html, body {
+  height: 100%;
+  background: var(--navy);
+  color: var(--cream);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+/* ── CSS-ONLY LANGUAGE TOGGLE ── */
+#lang-toggle { display: none; }
+
+.lang-pl { display: none; }
+.lang-en { display: inherit; }
+
+#lang-toggle:checked ~ .page .lang-pl { display: inherit; }
+#lang-toggle:checked ~ .page .lang-en { display: none; }
+
+/* button label text */
+.lbl-en { display: inline; }
+.lbl-pl { display: none; }
+#lang-toggle:checked ~ .page .lbl-en { display: none; }
+#lang-toggle:checked ~ .page .lbl-pl { display: inline; }
+
+/* ── LAYOUT ── */
+.page {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(2rem,4.5vw,4.5rem) clamp(2.5rem,6vw,6.5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-ring {
+  position: absolute; right: -16vw; top: 50%;
+  transform: translateY(-50%);
+  width: 62vw; height: 62vw;
+  border-radius: 50%;
+  border: 1px solid rgba(184,151,90,0.055);
+  pointer-events: none;
+}
+.bg-ring::after {
+  content: ''; position: absolute; inset: 16%;
+  border-radius: 50%;
+  border: 1px solid rgba(184,151,90,0.035);
+}
+
+.rule {
+  position: absolute;
+  left: clamp(2.5rem,6vw,6.5rem);
+  top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%, rgba(184,151,90,0.22) 20%,
+    rgba(184,151,90,0.22) 80%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ── HEADER ── */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-left: 2.8rem;
+  animation: fadeIn 1.2s ease both;
+}
+
+.logo-block { display: flex; flex-direction: column; gap: 0.38rem; }
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.9rem, 3vw, 3.2rem);
+  letter-spacing: 0.03em;
+  color: var(--cream);
+  line-height: 1;
+}
+.logo b { color: var(--gold); font-weight: 400; }
+
+.sfo-tag {
+  font-size: clamp(0.6rem, 0.72vw, 0.78rem);
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(184,151,90,0.55);
+}
+
+/* lang button — label for checkbox */
+.lang-btn {
+  display: inline-block;
+  background: none;
+  border: 1px solid rgba(184,151,90,0.35);
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(184,151,90,0.75);
+  padding: 0.32rem 0.75rem;
+  transition: color 0.3s, border-color 0.3s;
+  margin-top: 0.3rem;
+  user-select: none;
+}
+.lang-btn:hover { color: var(--gold); border-color: rgba(184,151,90,0.7); }
+
+/* ── MAIN ── */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 2.8rem;
+  gap: 1.8rem;
+  max-width: 54vw;
+}
+
+.eyebrow {
+  font-size: clamp(0.42rem, 0.48vw, 0.52rem);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.8;
+  animation: fadeIn 1.2s 0.12s ease both;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 5.2vw, 5.8rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  animation: fadeIn 1.2s 0.22s ease both;
+}
+h1 em { font-style: italic; color: var(--gold); }
+
+.statement-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  border-left: 1px solid var(--gold-dim);
+  padding-left: 1.4rem;
+  animation: fadeIn 1.2s 0.35s ease both;
+}
+
+.statement {
+  font-size: clamp(0.7rem, 0.8vw, 0.84rem);
+  line-height: 2.05;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.85rem, 1vw, 1.05rem);
+  color: rgba(184,151,90,0.6);
+  letter-spacing: 0.06em;
+}
+
+/* ── FOOTER ── */
+.sep {
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184,151,90,0.13), transparent);
+  margin-bottom: 1.8rem;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  padding-left: 2.8rem;
+  padding-bottom: 0.4rem;
+  animation: fadeIn 1.2s 0.5s ease both;
+}
+
+.footer-col { display: flex; flex-direction: column; gap: 0.4rem; }
+.footer-col--center { align-items: center; text-align: center; }
+.footer-col--right  { align-items: flex-end; text-align: right; }
+
+.footer-label {
+  font-size: 0.46rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.footer-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.82rem, 0.95vw, 1rem);
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+  line-height: 1.65;
+}
+a.footer-value:hover { color: var(--gold); }
+
+/* ── WATERMARK — right edge vertical ── */
+.invisible-mark {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.62rem, 0.72vw, 0.78rem);
+  letter-spacing: 0.38em;
+  color: rgba(184,151,90,0.35);
+  white-space: nowrap;
+  pointer-events: none;
+  text-transform: lowercase;
+  animation: fadeInMark 2s 1.2s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInMark {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- CSS-only toggle: checkbox must be sibling of .page -->
+<input type="checkbox" id="lang-toggle">
+
+<div class="page">
+  <div class="bg-ring"></div>
+  <div class="rule"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
+      <div class="logo">E<b>2</b>A WEALTH</div>
+      <div class="sfo-tag">Single Family Office</div>
+    </div>
+    <label for="lang-toggle" class="lang-btn">
+      <span class="lbl-en">PL</span>
+      <span class="lbl-pl">EN</span>
+    </label>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <p class="eyebrow">
+      <span class="lang-en">Capital Architecture</span>
+      <span class="lang-pl">Architektura Kapitału</span>
+    </p>
+
+    <h1>
+      <span class="lang-en">Wealth that<br>works in <em>silence.</em></span>
+      <span class="lang-pl">Majątek, który<br>działa w <em>ciszy.</em></span>
+    </h1>
+
+    <div class="statement-block">
+      <p class="statement lang-en">
+        We design integrated capital structures — where liquidity,
+        investment assets and ownership governance are united
+        in a single, purposeful architecture.
+        Multi-currency. Multi-custodian. Multi-jurisdictional.
+        Structurally efficient at every level.
+      </p>
+      <p class="statement lang-pl">
+        Projektujemy zintegrowane struktury kapitałowe — gdzie płynność,
+        aktywa inwestycyjne i ład właścicielski łączą się
+        w jedną, przemyślaną architekturę.
+        Wielowalutowy. Multi-custodian. Wielojurysdykcyjny.
+        Efektywny strukturalnie na każdym poziomie.
+      </p>
+      <p class="tagline">
+        <span class="lang-en">Built once. Held for generations.</span>
+        <span class="lang-pl">Zbudowany raz. Służący pokoleniom.</span>
+      </p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div class="sep"></div>
+  <footer>
+    <div class="footer-col">
+      <span class="footer-label">
+        <span class="lang-en">Office</span>
+        <span class="lang-pl">Biuro</span>
+      </span>
+      <span class="footer-value">Cosmopolitan, Twarda 4<br>00-105 Warszawa</span>
+    </div>
+
+    <div class="footer-col footer-col--center">
+      <span class="footer-label">
+        <span class="lang-en">Contact</span>
+        <span class="lang-pl">Kontakt</span>
+      </span>
+      <a href="mailto:contact@e2awealth.com" class="footer-value">contact@e2awealth.com</a>
+    </div>
+
+    <div class="footer-col footer-col--right">
+      <span class="footer-label">
+        <span class="lang-en">Engagements</span>
+        <span class="lang-pl">Współpraca</span>
+      </span>
+      <span class="footer-value">
+        <span class="lang-en">By introduction only</span>
+        <span class="lang-pl">Wyłącznie przez rekomendację</span>
+      </span>
+    </div>
+  </footer>
+
+  <div class="invisible-mark">invisible by design</div>
+</div>
+
+</body>
+</html>
